@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOUR | Βρες τη Μέθοδο Γυμναστικής σου</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --lime: #c8f135;
+    --orange: #ff6b35;
+    --gray: #1a1a1a;
+    --gray2: #2a2a2a;
+    --text-muted: #888;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  button { cursor: pointer; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--lime);
+  }
+
+  .lang-toggle {
+    display: flex;
+    background: var(--gray);
+    border-radius: 30px;
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .lang-btn {
+    padding: 6px 18px;
+    border: none;
+    border-radius: 26px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--text-muted);
+  }
+
+  .lang-btn.active {
+    background: var(--lime);
+    color: var(--black);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--lime);
+    border: 1px solid var(--lime);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 100px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 span { color: var(--lime); }
+
+  .hero p {
+    font-size: 18px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+
+  .start-btn {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 18px 40px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .start-btn:hover {
+    transform: scale(1.04);
+    background: #d9ff40;
+  }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 0 40px;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  .progress-track {
+    height: 3px;
+    background: #222;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--lime);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* QUESTIONNAIRE */
+  .quiz-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .question-block {
+    display: none;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .question-block.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .q-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .q-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .options-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .options-grid.two-col { grid-template-columns: 1fr 1fr; }
+  .options-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+  .option-btn {
+    background: var(--gray);
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+  }
+
+  .option-btn:hover {
+    border-color: #444;
+    background: var(--gray2);
+  }
+
+  .option-btn.selected {
+    border-color: var(--lime);
+    background: rgba(200,241,53,0.08);
+    color: var(--lime);
+  }
+
+  .option-btn .opt-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .option-btn .opt-label { font-weight: 500; }
+  .option-btn .opt-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .option-btn.selected .opt-desc { color: rgba(200,241,53,0.6); }
+
+  /* multi select note */
+  .multi-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* NAV BUTTONS */
+  .nav-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn-next {
+    background: var(--lime);
+    color: var(--black);
+    border: none;
+    border-radius: 50px;
+    padding: 16px 36px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .btn-next:hover { transform: scale(1.03); }
+  .btn-next:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+  .btn-back {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid #333;
+    border-radius: 50px;
+    padding: 16px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover { border-color: #666; color: var(--white); }
+
+  /* RESULTS */
+  #results-section { display: none; padding: 60px 40px; max-width: 900px; margin: 0 auto; }
+
+  .results-header { margin-bottom: 50px; }
+
+  .results-header .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .results-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .results-header p { color: var(--text-muted); font-size: 16px; }
+
+  .profile-card {
+    background: var(--gray);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border-left: 4px solid var(--lime);
+    animation: fadeUp 0.5s ease;
+  }
+
+  .profile-card .profile-type {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .profile-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .profile-card .reason {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .methods-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .method-tag {
+    background: rgba(200,241,53,0.12);
+    border: 1px solid rgba(200,241,53,0.3);
+    color: var(--lime);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .method-tag.secondary {
+    background: rgba(255,107,53,0.1);
+    border-color: rgba(255,107,53,0.3);
+    color: var(--orange);
+  }
+
+  /* Method detail cards */
+  .methods-detail { margin-top: 50px; }
+
+  .methods-detail h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    color: var(--text-muted);
+  }
+
+  .method-detail-card {
+    background: var(--gray);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .method-detail-card .m-icon {
+    font-size: 32px;
+    min-width: 48px;
+  }
+
+  .method-detail-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .intensity-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .intensity-low { background: rgba(200,241,53,0.15); color: var(--lime); }
+  .intensity-medium { background: rgba(255,165,0,0.15); color: #ffa500; }
+  .intensity-high { background: rgba(255,107,53,0.15); color: var(--orange); }
+
+  .pros-list { list-style: none; }
+  .pros-list li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 3px 0;
+    line-height: 1.5;
+  }
+
+  .pros-list li::before {
+    content: '→ ';
+    color: var(--lime);
+    font-weight: 700;
+  }
+
+  .restart-btn {
+    margin-top: 50px;
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid #444;
+    border-radius: 50px;
+    padding: 16px 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .restart-btn:hover { border-color: var(--lime); color: var(--lime); }
+
+  /* Sections visibility */
+  #hero-section, #quiz-section, #results-section { }
+  #quiz-section { display: none; }
+
+  @media (max-width: 600px) {
+    header { padding: 16px 20px; }
+    .hero { padding: 50px 20px 40px; }
+    .quiz-wrap, #results-section { padding-left: 20px; padding-right: 20px; }
+    .progress-bar-wrap { padding: 0 20px; }
+    .options-grid.two-col, .options-grid.three-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">YOUR</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-el">ΕΛ</button>
+    <button class="lang-btn" id="btn-en">EN</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero-section">
+  <div class="hero">
+    <div class="hero-tag" data-el="Ανακάλυψε τον εαυτό σου" data-en="Discover yourself">Ανακάλυψε τον εαυτό σου</div>
+    <h1><span data-el="Βρες τη" data-en="Find your">Βρες τη</span><br><span data-el="μέθοδο" data-en="perfect">μέθοδο</span><br><span style="color:var(--lime)" data-el="γυμναστικής σου." data-en="workout method.">γυμναστικής σου.</span></h1>
+    <p data-el="Απάντησε σε 6 απλές ερωτήσεις και λάβε εξατομικευμένες προτάσεις βασισμένες στους στόχους, την εμπειρία και τις προτιμήσεις σου." 
+       data-en="Answer 6 simple questions and get personalized workout recommendations based on your goals, experience, and preferences.">
+      Απάντησε σε 6 απλές ερωτήσεις και λάβε εξατομικευμένες προτάσεις βασισμένες στους στόχους, την εμπειρία και τις προτιμήσεις σου.
+    </p>
+    <button class="start-btn" id="start-btn">
+      <span data-el="Ξεκινάμε →" data-en="Let's go →">Ξεκινάμε →</span>
+    </button>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <span id="progress-label">1/6</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- Q1: Primary Goal -->
+    <div class="question-block active" id="q1">
+      <div class="q-section-label" data-el="Α. Στόχοι" data-en="A. Goals">Α. Στόχοι</div>
+      <div class="q-title" data-el="Ποιος είναι ο βασικός σου στόχος;" data-en="What is your main goal?">Ποιος είναι ο βασικός σου στόχος;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q1-options">
+        <button class="option-btn" data-q="q1" data-val="weight_loss">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label" data-el="Απώλεια βάρους" data-en="Weight loss">Απώλεια βάρους</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="muscle">
+          <span class="opt-icon">💪</span>
+          <span class="opt-label" data-el="Αύξηση μυϊκής μάζας" data-en="Build muscle">Αύξηση μυϊκής μάζας</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="toning">
+          <span class="opt-icon">✨</span>
+          <span class="opt-label" data-el="Γράμμωση" data-en="Toning">Γράμμωση</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="endurance">
+          <span class="opt-icon">🏃</span>
+          <span class="opt-label" data-el="Βελτίωση αντοχής" data-en="Improve endurance">Βελτίωση αντοχής</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="stress">
+          <span class="opt-icon">🧘</span>
+          <span class="opt-label" data-el="Μείωση άγχους" data-en="Reduce stress">Μείωση άγχους</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="flexibility">
+          <span class="opt-icon">🤸</span>
+          <span class="opt-label" data-el="Ευλυγισία / Ευκαμψία" data-en="Flexibility">Ευλυγισία / Ευκαμψία</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="rehab">
+          <span class="opt-icon">🩺</span>
+          <span class="opt-label" data-el="Αποκατάσταση / Ήπια άσκηση" data-en="Rehab / Gentle exercise">Αποκατάσταση / Ήπια άσκηση</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="fun">
+          <span class="opt-icon">🎉</span>
+          <span class="opt-label" data-el="Διασκέδαση & Κοινωνικότητα" data-en="Fun & Socializing">Διασκέδαση & Κοινωνικότητα</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-next" id="q1-next" data-action="next" data-from="1" disabled data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q2: Fitness Level -->
+    <div class="question-block" id="q2">
+      <div class="q-section-label" data-el="Β. Επίπεδο Φυσικής Κατάστασης" data-en="B. Fitness Level">Β. Επίπεδο Φυσικής Κατάστασης</div>
+      <div class="q-title" data-el="Πώς θα περιέγραφες το επίπεδό σου;" data-en="How would you describe your fitness level?">Πώς θα περιέγραφες το επίπεδό σου;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid" id="q2-options">
+        <button class="option-btn" data-q="q2" data-val="beginner_zero">
+          <span class="opt-icon">🌱</span>
+          <span class="opt-label" data-el="Πολύ αρχάριος" data-en="Complete beginner">Πολύ αρχάριος</span>
+          <div class="opt-desc" data-el="Δεν ασκούμαι σχεδόν καθόλου" data-en="I barely exercise at all">Δεν ασκούμαι σχεδόν καθόλου</div>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="beginner">
+          <span class="opt-icon">🚶</span>
+          <span class="opt-label" data-el="Αρχάριος" data-en="Beginner">Αρχάριος</span>
+          <div class="opt-desc" data-el="Ασκούμαι μερικές φορές το μήνα" data-en="I exercise a few times a month">Ασκούμαι μερικές φορές το μήνα</div>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="intermediate">
+          <span class="opt-icon">🏋️</span>
+          <span class="opt-label" data-el="Μέτριος" data-en="Intermediate">Μέτριος</span>
+          <div class="opt-desc" data-el="Ασκούμαι 2-3 φορές την εβδομάδα" data-en="I work out 2-3 times a week">Ασκούμαι 2-3 φορές την εβδομάδα</div>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="advanced">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-label" data-el="Προχωρημένος" data-en="Advanced">Προχωρημένος</span>
+          <div class="opt-desc" data-el="Ασκούμαι 4-5+ φορές την εβδομάδα" data-en="I work out 4-5+ times a week">Ασκούμαι 4-5+ φορές την εβδομάδα</div>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="2" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q2-next" data-action="next" data-from="2" disabled data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q3: Injuries -->
+    <div class="question-block" id="q3">
+      <div class="q-section-label" data-el="Γ. Υγεία & Περιορισμοί" data-en="C. Health & Limitations">Γ. Υγεία & Περιορισμοί</div>
+      <div class="q-title" data-el="Έχεις θέματα στις αρθρώσεις ή τραυματισμούς;" data-en="Do you have joint issues or injuries?">Έχεις θέματα στις αρθρώσεις ή τραυματισμούς;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q3-options">
+        <button class="option-btn" data-q="q3" data-val="none">
+          <span class="opt-icon">✅</span>
+          <span class="opt-label" data-el="Όχι, είμαι καλά" data-en="No, I'm fine">Όχι, είμαι καλά</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="knees">
+          <span class="opt-icon">🦵</span>
+          <span class="opt-label" data-el="Ναι — γόνατα" data-en="Yes — knees">Ναι — γόνατα</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="back">
+          <span class="opt-icon">🦴</span>
+          <span class="opt-label" data-el="Ναι — μέση / πλάτη" data-en="Yes — back">Ναι — μέση / πλάτη</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="shoulders">
+          <span class="opt-icon">🫸</span>
+          <span class="opt-label" data-el="Ναι — ώμοι" data-en="Yes — shoulders">Ναι — ώμοι</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="general" style="grid-column: 1/-1">
+          <span class="opt-icon">⚠️</span>
+          <span class="opt-label" data-el="Ναι — γενικά θέλω ήπια άσκηση" data-en="Yes — I need gentle exercise generally">Ναι — γενικά θέλω ήπια άσκηση</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="3" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q3-next" data-action="next" data-from="3" disabled data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q4: Preference Style -->
+    <div class="question-block" id="q4">
+      <div class="q-section-label" data-el="Δ. Προσωπικές Προτιμήσεις" data-en="D. Personal Preferences">Δ. Προσωπικές Προτιμήσεις</div>
+      <div class="q-title" data-el="Τι σου αρέσει στην άσκηση;" data-en="What do you enjoy about exercise?">Τι σου αρέσει στην άσκηση;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q4-options">
+        <button class="option-btn" data-q="q4" data-val="full_body">
+          <span class="opt-icon">🌀</span>
+          <span class="opt-label" data-el="Να κινείται όλο το σώμα" data-en="Full body movement">Να κινείται όλο το σώμα</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="targeted">
+          <span class="opt-icon">🎯</span>
+          <span class="opt-label" data-el="Συγκεκριμένες μυϊκές ομάδες" data-en="Specific muscle groups">Συγκεκριμένες μυϊκές ομάδες</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="rhythm">
+          <span class="opt-icon">🎵</span>
+          <span class="opt-label" data-el="Ρυθμός & χορός" data-en="Rhythm & dance">Ρυθμός & χορός</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="skill">
+          <span class="opt-icon">🤹</span>
+          <span class="opt-label" data-el="Τεχνική & δεξιοτεχνία" data-en="Technique & skill">Τεχνική & δεξιοτεχνία</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="social">
+          <span class="opt-icon">👥</span>
+          <span class="opt-label" data-el="Ομαδική ατμόσφαιρα" data-en="Group atmosphere">Ομαδική ατμόσφαιρα</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="structured">
+          <span class="opt-icon">📋</span>
+          <span class="opt-label" data-el="Δομημένη ρουτίνα" data-en="Structured routine">Δομημένη ρουτίνα</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="4" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q4-next" data-action="next" data-from="4" disabled data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q5: Time -->
+    <div class="question-block" id="q5">
+      <div class="q-section-label" data-el="Ε. Χρόνος & Συχνότητα" data-en="E. Time & Frequency">Ε. Χρόνος & Συχνότητα</div>
+      <div class="q-title" data-el="Πόσο χρόνο έχεις ανά προπόνηση;" data-en="How much time do you have per workout?">Πόσο χρόνο έχεις ανά προπόνηση;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid" id="q5-options">
+        <button class="option-btn" data-q="q5" data-val="short">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-label" data-el="15–25 λεπτά" data-en="15–25 minutes">15–25 λεπτά</span>
+          <div class="opt-desc" data-el="Λίγος χρόνος, μεγάλη ένταση" data-en="Short time, high intensity">Λίγος χρόνος, μεγάλη ένταση</div>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="medium">
+          <span class="opt-icon">⏱️</span>
+          <span class="opt-label" data-el="30–45 λεπτά" data-en="30–45 minutes">30–45 λεπτά</span>
+          <div class="opt-desc" data-el="Ισορροπία ποιότητας και χρόνου" data-en="Balance of quality and time">Ισορροπία ποιότητας και χρόνου</div>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="long">
+          <span class="opt-icon">🕐</span>
+          <span class="opt-label" data-el="60+ λεπτά" data-en="60+ minutes">60+ λεπτά</span>
+          <div class="opt-desc" data-el="Πλήρης προπόνηση χωρίς βιασύνη" data-en="Full workout, no rush">Πλήρης προπόνηση χωρίς βιασύνη</div>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="5" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q5-next" data-action="next" data-from="5" disabled data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q6: Motivation -->
+    <div class="question-block" id="q6">
+      <div class="q-section-label" data-el="Ζ. Ψυχολογία & Κίνητρο" data-en="F. Psychology & Motivation">Ζ. Ψυχολογία & Κίνητρο</div>
+      <div class="q-title" data-el="Τι σε παρακινεί περισσότερο;" data-en="What motivates you most?">Τι σε παρακινεί περισσότερο;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q6-options">
+        <button class="option-btn" data-q="q6" data-val="progress_skill">
+          <span class="opt-icon">📈</span>
+          <span class="opt-label" data-el="Πρόοδος σε δεξιότητες" data-en="Skill progression">Πρόοδος σε δεξιότητες</span>
+          <div class="opt-desc" data-el="π.χ. muscle-ups, πρώτο pull-up" data-en="e.g. first muscle-up, handstand">π.χ. muscle-ups, πρώτο pull-up</div>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="burn_calories">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label" data-el="Μεγάλη καύση θερμίδων" data-en="Burning lots of calories">Μεγάλη καύση θερμίδων</span>
+          <div class="opt-desc" data-el="Θέλω να νιώθω ότι «δούλεψα»" data-en="I want to feel like I worked hard">Θέλω να νιώθω ότι «δούλεψα»</div>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="relax">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-label" data-el="Χαλάρωση & ισορροπία" data-en="Relaxation & balance">Χαλάρωση & ισορροπία</span>
+          <div class="opt-desc" data-el="Να ηρεμεί το μυαλό μου" data-en="To calm my mind">Να ηρεμεί το μυαλό μου</div>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="competition">
+          <span class="opt-icon">🏆</span>
+          <span class="opt-label" data-el="Συναγωνισμός" data-en="Competition">Συναγωνισμός</span>
+          <div class="opt-desc" data-el="Αγώνες, σκορ, beat τα limits" data-en="Matches, scores, beat limits">Αγώνες, σκορ, beat τα limits</div>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="aesthetics">
+          <span class="opt-icon">💎</span>
+          <span class="opt-label" data-el="Αισθητική βελτίωση" data-en="Aesthetic improvement">Αισθητική βελτίωση</span>
+          <div class="opt-desc" data-el="Να δείχνω καλύτερα, γράμμωση" data-en="Look better, toning">Να δείχνω καλύτερα, γράμμωση</div>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="fun_only">
+          <span class="opt-icon">😄</span>
+          <span class="opt-label" data-el="Διασκέδαση πάνω απ' όλα" data-en="Fun above all">Διασκέδαση πάνω απ' όλα</span>
+          <div class="opt-desc" data-el="Αν δεν περνάω καλά, δεν πάω" data-en="If it's not fun, I won't go">Αν δεν περνάω καλά, δεν πάω</div>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="6" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q6-next" data-action="results" disabled data-el="Δες τα αποτελέσματα 🎯" data-en="See results 🎯">Δες τα αποτελέσματα 🎯</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results-section">
+  <div class="results-header">
+    <div class="tag" data-el="Τα αποτελέσματά σου" data-en="Your results">Τα αποτελέσματά σου</div>
+    <h2 data-el="Η μέθοδός σου." data-en="Your method.">Η μέθοδός σου.</h2>
+    <p id="results-intro"></p>
+  </div>
+  <div id="results-content"></div>
+  <button class="restart-btn" id="restart-btn" data-el="← Ξεκίνα ξανά" data-en="← Start over">← Ξεκίνα ξανά</button>
+</section>
+
+<script>
+// ============================
+// DATA
+// ============================
+const METHODS = {
+  walking: {
+    icon: '🚶', intensity: 'low',
+    el: { name: 'Περπάτημα / Γρήγορο Περπάτημα', intensity_label: 'Χαμηλή', pros: ['Ιδανικό για αρχάριους', 'Βελτιώνει καρδιοαγγειακή υγεία', 'Χαμηλή επιβάρυνση στις αρθρώσεις', 'Μειώνει το στρες', 'Δεν χρειάζεται εξοπλισμός'] },
+    en: { name: 'Walking / Brisk Walking', intensity_label: 'Low', pros: ['Ideal for beginners', 'Improves cardiovascular health', 'Low joint impact', 'Reduces stress', 'No equipment needed'] }
+  },
+  running: {
+    icon: '🏃', intensity: 'high',
+    el: { name: 'Τρέξιμο / Jogging', intensity_label: 'Μεσαία–Υψηλή', pros: ['Αυξάνει την αντοχή', 'Καίει πολλές θερμίδες', 'Βελτιώνει την υγεία της καρδιάς', 'Βοηθά στην απώλεια βάρους'] },
+    en: { name: 'Running / Jogging', intensity_label: 'Medium–High', pros: ['Increases endurance', 'Burns lots of calories', 'Improves heart health', 'Helps with weight loss'] }
+  },
+  cycling: {
+    icon: '🚴', intensity: 'medium',
+    el: { name: 'Ποδηλασία', intensity_label: 'Μεσαία', pros: ['Ενδυναμώνει πόδια και γλουτούς', 'Βελτιώνει την αντοχή', 'Χαμηλή επιβάρυνση για γόνατα', 'Καρδιοαναπνευστική ενδυνάμωση'] },
+    en: { name: 'Cycling', intensity_label: 'Medium', pros: ['Strengthens legs and glutes', 'Improves endurance', 'Low knee impact', 'Cardiorespiratory strengthening'] }
+  },
+  swimming: {
+    icon: '🏊', intensity: 'medium',
+    el: { name: 'Κολύμβηση', intensity_label: 'Μεσαία', pros: ['Προπονεί όλο το σώμα', 'Ελάχιστη καταπόνηση αρθρώσεων', 'Ιδανική για τραυματισμούς', 'Βελτιώνει αναπνευστική ικανότητα'] },
+    en: { name: 'Swimming', intensity_label: 'Medium', pros: ['Full body workout', 'Minimal joint stress', 'Ideal for injuries', 'Improves respiratory capacity'] }
+  },
+  pilates: {
+    icon: '🧘', intensity: 'low',
+    el: { name: 'Pilates', intensity_label: 'Χαμηλή–Μεσαία', pros: ['Ενδυναμώνει τον κορμό', 'Βελτιώνει στάση σώματος', 'Αυξάνει ευλυγισία', 'Ιδανικό για αποκατάσταση'] },
+    en: { name: 'Pilates', intensity_label: 'Low–Medium', pros: ['Strengthens core', 'Improves posture', 'Increases flexibility', 'Ideal for rehabilitation'] }
+  },
+  yoga: {
+    icon: '🧘‍♀️', intensity: 'low',
+    el: { name: 'Yoga', intensity_label: 'Χαμηλή–Μεσαία', pros: ['Μειώνει άγχος και στρες', 'Αυξάνει ευλυγισία', 'Ενισχύει ισορροπία', 'Βελτιώνει αναπνοή και συγκέντρωση'] },
+    en: { name: 'Yoga', intensity_label: 'Low–Medium', pros: ['Reduces anxiety and stress', 'Increases flexibility', 'Improves balance', 'Better breathing and focus'] }
+  },
+  hiit: {
+    icon: '⚡', intensity: 'high',
+    el: { name: 'HIIT', intensity_label: 'Υψηλή', pros: ['Μεγάλη καύση θερμίδων σε λίγο χρόνο', 'Αυξάνει μεταβολισμό για ώρες μετά', 'Ενισχύει αντοχή και δύναμη', 'Ιδανικό για βεβαρημένο πρόγραμμα'] },
+    en: { name: 'HIIT', intensity_label: 'High', pros: ['Big calorie burn in little time', 'Boosts metabolism for hours after', 'Improves endurance and strength', 'Ideal for busy schedules'] }
+  },
+  weights: {
+    icon: '🏋️', intensity: 'high',
+    el: { name: 'Ασκήσεις με Βάρη / Μυϊκή Ενδυνάμωση', intensity_label: 'Μεσαία–Υψηλή', pros: ['Αυξάνει μυϊκή μάζα', 'Ενισχύει οστά και αρθρώσεις', 'Αυξάνει βασικό μεταβολισμό', 'Βοηθά στην απώλεια λίπους μακροπρόθεσμα'] },
+    en: { name: 'Weight Training', intensity_label: 'Medium–High', pros: ['Increases muscle mass', 'Strengthens bones and joints', 'Raises base metabolism', 'Long-term fat loss'] }
+  },
+  crossfit: {
+    icon: '🔥', intensity: 'high',
+    el: { name: 'CrossFit', intensity_label: 'Υψηλή', pros: ['Ενδυνάμωση όλου του σώματος', 'Συνδυάζει βάρη και cardio', 'Βελτιώνει εκρηκτικότητα και αντοχή', 'Πολύ δυναμικό και κοινωνικό'] },
+    en: { name: 'CrossFit', intensity_label: 'High', pros: ['Full body strength', 'Combines weights and cardio', 'Improves explosiveness and endurance', 'Dynamic and social'] }
+  },
+  group: {
+    icon: '💃', intensity: 'medium',
+    el: { name: 'Ομαδικά Προγράμματα (Zumba, Aerobic, Dance Fitness)', intensity_label: 'Μεσαία', pros: ['Διασκεδαστικά και ιδανικά για ψυχολογία', 'Καλό cardio', 'Βελτιώνουν ρυθμό και συντονισμό', 'Κατάλληλα για όλες τις ηλικίες'] },
+    en: { name: 'Group Classes (Zumba, Aerobics, Dance Fitness)', intensity_label: 'Medium', pros: ['Fun and great for mental health', 'Good cardio', 'Improves rhythm and coordination', 'Suitable for all ages'] }
+  },
+  calisthenics: {
+    icon: '💪', intensity: 'medium',
+    el: { name: 'Καλλισθενική Γυμναστική (Calisthenics)', intensity_label: 'Μεσαία–Υψηλή', pros: ['Χτίζει λειτουργική δύναμη', 'Δεν απαιτεί εξοπλισμός', 'Αναπτύσσει δυνατό κορμό', 'Ενισχύει ευλυγισία & κινητικότητα', 'Σταδιακή φυσική πρόοδος'] },
+    en: { name: 'Calisthenics', intensity_label: 'Medium–High', pros: ['Builds functional strength', 'No equipment needed', 'Develops strong core', 'Improves flexibility & mobility', 'Natural gradual progression'] }
+  },
+  padel: {
+    icon: '🎾', intensity: 'medium',
+    el: { name: 'Padel / Tennis', intensity_label: 'Μεσαία–Υψηλή', pros: ['Cardio χωρίς υπερβολική καταπόνηση', 'Βελτιώνει αντίδραση και ισορροπία', 'Κοινωνικό και ανταγωνιστικό', 'Ανάπτυξη τεχνικής δεξιότητας'] },
+    en: { name: 'Padel / Tennis', intensity_label: 'Medium–High', pros: ['Cardio without excessive strain', 'Improves reaction and balance', 'Social and competitive', 'Develops technical skill'] }
+  }
+};
+
+// ============================
+// RECOMMENDATION ENGINE
+// ============================
+function getRecommendations(answers) {
+  const { goal, level, injury, style, time, motivation } = answers;
+  let scores = {};
+  Object.keys(METHODS).forEach(k => scores[k] = 0);
+
+  // GOAL scoring
+  if (goal === 'weight_loss') { scores.hiit += 4; scores.running += 3; scores.cycling += 2; scores.group += 2; scores.crossfit += 2; }
+  if (goal === 'muscle') { scores.weights += 5; scores.calisthenics += 4; scores.crossfit += 2; }
+  if (goal === 'toning') { scores.calisthenics += 4; scores.pilates += 3; scores.weights += 3; scores.hiit += 2; }
+  if (goal === 'endurance') { scores.running += 4; scores.cycling += 3; scores.swimming += 3; scores.hiit += 2; }
+  if (goal === 'stress') { scores.yoga += 5; scores.swimming += 3; scores.walking += 3; scores.pilates += 2; }
+  if (goal === 'flexibility') { scores.yoga += 5; scores.pilates += 4; scores.calisthenics += 2; }
+  if (goal === 'rehab') { scores.pilates += 5; scores.swimming += 5; scores.yoga += 4; scores.walking += 3; }
+  if (goal === 'fun') { scores.padel += 5; scores.group += 5; scores.crossfit += 2; }
+
+  // INJURY scoring (penalties)
+  if (injury === 'knees') { scores.running -= 4; scores.hiit -= 2; scores.crossfit -= 2; scores.swimming += 3; scores.pilates += 3; scores.yoga += 2; scores.cycling += 3; }
+  if (injury === 'back') { scores.weights -= 2; scores.running -= 2; scores.pilates += 4; scores.swimming += 3; scores.yoga += 2; }
+  if (injury === 'shoulders') { scores.calisthenics -= 3; scores.crossfit -= 3; scores.weights -= 2; scores.walking += 2; scores.cycling += 2; }
+  if (injury === 'general') { scores.hiit -= 4; scores.crossfit -= 4; scores.running -= 3; scores.swimming += 4; scores.pilates += 4; scores.yoga += 4; scores.walking += 4; }
+
+  // LEVEL scoring
+  if (level === 'beginner_zero' || level === 'beginner') {
+    scores.hiit -= 2; scores.crossfit -= 3; scores.calisthenics -= 1;
+    scores.walking += 2; scores.pilates += 1; scores.yoga += 1; scores.cycling += 1;
+  }
+  if (level === 'advanced') {
+    scores.crossfit += 2; scores.calisthenics += 2; scores.hiit += 1; scores.weights += 1;
+  }
+
+  // STYLE scoring
+  if (style === 'full_body') { scores.crossfit += 2; scores.swimming += 2; scores.hiit += 2; scores.calisthenics += 1; }
+  if (style === 'targeted') { scores.weights += 3; scores.calisthenics += 2; scores.pilates += 1; }
+  if (style === 'rhythm') { scores.group += 4; scores.padel += 1; }
+  if (style === 'skill') { scores.calisthenics += 3; scores.padel += 3; scores.yoga += 2; }
+  if (style === 'social') { scores.group += 3; scores.padel += 3; scores.crossfit += 2; }
+  if (style === 'structured') { scores.weights += 2; scores.hiit += 2; scores.pilates += 2; }
+
+  // TIME scoring
+  if (time === 'short') { scores.hiit += 3; scores.calisthenics += 2; scores.running += 1; }
+  if (time === 'medium') { /* neutral */ }
+  if (time === 'long') { scores.swimming += 2; scores.weights += 2; scores.yoga += 2; scores.pilates += 1; }
+
+  // MOTIVATION scoring
+  if (motivation === 'progress_skill') { scores.calisthenics += 3; scores.padel += 2; scores.weights += 1; }
+  if (motivation === 'burn_calories') { scores.hiit += 3; scores.running += 2; scores.crossfit += 2; }
+  if (motivation === 'relax') { scores.yoga += 3; scores.walking += 2; scores.swimming += 2; scores.pilates += 1; }
+  if (motivation === 'competition') { scores.padel += 4; scores.crossfit += 2; scores.running += 1; }
+  if (motivation === 'aesthetics') { scores.weights += 3; scores.calisthenics += 2; scores.hiit += 2; }
+  if (motivation === 'fun_only') { scores.group += 4; scores.padel += 3; scores.crossfit += 1; }
+
+  // Zero out negatives
+  Object.keys(scores).forEach(k => { if (scores[k] < 0) scores[k] = 0; });
+
+  // Sort
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const primary = sorted.slice(0, 3).filter(([k, v]) => v > 0).map(([k]) => k);
+  const secondary = sorted.slice(3, 6).filter(([k, v]) => v > 0).map(([k]) => k);
+
+  return { primary, secondary, scores };
+}
+
+// ============================
+// STATE
+// ============================
+let lang = 'el';
+let currentQ = 1;
+const totalQ = 6;
+let answers = {};
+
+// ============================
+// LANG
+// ============================
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-el').classList.toggle('active', l === 'el');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.querySelectorAll('[data-el]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + l);
+  });
+  document.documentElement.lang = l;
+}
+
+// ============================
+// QUIZ NAVIGATION
+// ============================
+function startQuiz() {
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('quiz-section').style.display = 'block';
+  updateProgress();
+}
+
+function selectOption(qId, value, btn) {
+  // Clear previous selection
+  document.querySelectorAll(`#${qId}-options .option-btn`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[qId] = value;
+  document.getElementById(`${qId}-next`).disabled = false;
+}
+
+function nextQ(from) {
+  document.getElementById(`q${from}`).classList.remove('active');
+  currentQ = from + 1;
+  document.getElementById(`q${currentQ}`).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQ(from) {
+  document.getElementById(`q${from}`).classList.remove('active');
+  currentQ = from - 1;
+  document.getElementById(`q${currentQ}`).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const pct = Math.round(((currentQ - 1) / totalQ) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `${currentQ}/${totalQ}`;
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+
+// ============================
+// RESULTS
+// ============================
+function showResults() {
+  const answersMap = {
+    goal: answers.q1,
+    level: answers.q2,
+    injury: answers.q3,
+    style: answers.q4,
+    time: answers.q5,
+    motivation: answers.q6
+  };
+
+  const { primary, secondary } = getRecommendations(answersMap);
+
+  // Log submission to Formspree (silent, doesn't affect UX)
+  submitToFormspree(answersMap, primary, secondary);
+
+  document.getElementById('quiz-section').style.display = 'none';
+  const resultsSection = document.getElementById('results-section');
+  resultsSection.style.display = 'block';
+
+  // Intro text
+  const intros = {
+    el: 'Βάσει των απαντήσεών σου, αυτές είναι οι ιδανικές μέθοδοι γυμναστικής για σένα:',
+    en: 'Based on your answers, these are the ideal workout methods for you:'
+  };
+  document.getElementById('results-intro').textContent = intros[lang];
+
+  // Build content
+  let html = '';
+
+  // Primary recommendation card
+  html += `<div class="profile-card">
+    <div class="profile-type" data-el="✅ Κύριες Προτάσεις" data-en="✅ Primary Recommendations">${lang === 'el' ? '✅ Κύριες Προτάσεις' : '✅ Primary Recommendations'}</div>
+    <h3>${lang === 'el' ? 'Η μέθοδός σου' : 'Your method'}</h3>
+    <p class="reason">${lang === 'el' ? 'Αυτές οι μέθοδοι ταιριάζουν απόλυτα με τους στόχους, το επίπεδο και τις προτιμήσεις σου.' : 'These methods perfectly match your goals, level, and preferences.'}</p>
+    <div class="methods-list">
+      ${primary.map(k => `<span class="method-tag">${METHODS[k].icon} ${METHODS[k][lang].name}</span>`).join('')}
+    </div>
+  </div>`;
+
+  if (secondary.length > 0) {
+    html += `<div class="profile-card" style="border-left-color: var(--orange)">
+      <div class="profile-type" style="color:var(--orange)" data-el="🔄 Εναλλακτικές Επιλογές" data-en="🔄 Alternative Options">${lang === 'el' ? '🔄 Εναλλακτικές Επιλογές' : '🔄 Alternative Options'}</div>
+      <h3>${lang === 'el' ? 'Και επίσης...' : 'Also consider...'}</h3>
+      <p class="reason">${lang === 'el' ? 'Αυτές είναι καλές εναλλακτικές που μπορείς να συνδυάσεις.' : 'Good alternatives you can mix in.'}</p>
+      <div class="methods-list">
+        ${secondary.map(k => `<span class="method-tag secondary">${METHODS[k].icon} ${METHODS[k][lang].name}</span>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Detail cards for primary
+  html += `<div class="methods-detail">
+    <h3>${lang === 'el' ? 'Λεπτομέρειες' : 'Details'}</h3>`;
+
+  primary.forEach(k => {
+    const m = METHODS[k];
+    const d = m[lang];
+    const intClass = m.intensity === 'low' ? 'intensity-low' : m.intensity === 'medium' ? 'intensity-medium' : 'intensity-high';
+    const intLabel = lang === 'el' ? `Ένταση: ${d.intensity_label}` : `Intensity: ${d.intensity_label}`;
+    html += `<div class="method-detail-card">
+      <div class="m-icon">${m.icon}</div>
+      <div>
+        <h4>${d.name}</h4>
+        <span class="intensity-badge ${intClass}">${intLabel}</span>
+        <ul class="pros-list">
+          ${d.pros.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+      </div>
+    </div>`;
+  });
+
+  html += `</div>`;
+
+  document.getElementById('results-content').innerHTML = html;
+
+  // Update static data-el elements on the page
+  setLang(lang);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  answers = {};
+  currentQ = 1;
+
+  // Reset all question blocks
+  document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('q1').classList.add('active');
+
+  // Reset all selections
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+
+  // Reset next buttons
+  for (let i = 1; i <= 6; i++) {
+    const btn = document.getElementById(`q${i}-next`);
+    if (btn) btn.disabled = true;
+  }
+
+  document.getElementById('results-section').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================
+// FORMSPREE SUBMISSION
+// ============================
+// 1. Go to https://formspree.io → sign up free → New Form → copy your form ID
+// 2. Replace 'YOUR_FORM_ID' below with it (e.g. 'xpwzgkla')
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+function submitToFormspree(answersMap, primary, secondary) {
+  if (FORMSPREE_ID === 'YOUR_FORM_ID') return; // Skip if not configured
+
+  const goalLabels = {
+    weight_loss: 'Απώλεια βάρους', muscle: 'Αύξηση μυϊκής μάζας', toning: 'Γράμμωση',
+    endurance: 'Βελτίωση αντοχής', stress: 'Μείωση άγχους', flexibility: 'Ευλυγισία',
+    rehab: 'Αποκατάσταση', fun: 'Διασκέδαση'
+  };
+  const levelLabels = {
+    beginner_zero: 'Πολύ αρχάριος', beginner: 'Αρχάριος',
+    intermediate: 'Μέτριος', advanced: 'Προχωρημένος'
+  };
+  const injuryLabels = {
+    none: 'Όχι', knees: 'Γόνατα', back: 'Μέση/Πλάτη',
+    shoulders: 'Ώμοι', general: 'Γενικά (ήπια άσκηση)'
+  };
+  const styleLabels = {
+    full_body: 'Όλο το σώμα', targeted: 'Συγκεκριμένες μυς', rhythm: 'Ρυθμός & χορός',
+    skill: 'Τεχνική & δεξιοτεχνία', social: 'Ομαδική ατμόσφαιρα', structured: 'Δομημένη ρουτίνα'
+  };
+  const timeLabels = { short: '15-25 λεπτά', medium: '30-45 λεπτά', long: '60+ λεπτά' };
+  const motivationLabels = {
+    progress_skill: 'Πρόοδος δεξιοτήτων', burn_calories: 'Καύση θερμίδων',
+    relax: 'Χαλάρωση', competition: 'Συναγωνισμός',
+    aesthetics: 'Αισθητική βελτίωση', fun_only: 'Διασκέδαση'
+  };
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    language: lang,
+    goal: goalLabels[answersMap.goal] || answersMap.goal,
+    fitness_level: levelLabels[answersMap.level] || answersMap.level,
+    injury: injuryLabels[answersMap.injury] || answersMap.injury,
+    style: styleLabels[answersMap.style] || answersMap.style,
+    session_time: timeLabels[answersMap.time] || answersMap.time,
+    motivation: motivationLabels[answersMap.motivation] || answersMap.motivation,
+    primary_recommendations: primary.map(k => METHODS[k][lang].name).join(' | '),
+    secondary_recommendations: secondary.map(k => METHODS[k][lang].name).join(' | '),
+    _subject: 'YOUR — Νέα συμπλήρωση ερωτηματολογίου'
+  };
+
+  fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {}); // Silent fail — user experience unaffected
+}
+
+// ============================
+// EVENT WIRING (iOS Safari safe — no inline onclick)
+// ============================
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Lang toggle
+  document.getElementById('btn-el').addEventListener('click', function () { setLang('el'); });
+  document.getElementById('btn-en').addEventListener('click', function () { setLang('en'); });
+
+  // Start button
+  document.getElementById('start-btn').addEventListener('click', function () { startQuiz(); });
+
+  // Restart button
+  document.getElementById('restart-btn').addEventListener('click', function () { restartQuiz(); });
+
+  // Option buttons — delegated from each options grid
+  document.querySelectorAll('.options-grid').forEach(function (grid) {
+    grid.addEventListener('click', function (e) {
+      var btn = e.target.closest('.option-btn');
+      if (!btn) return;
+      var q = btn.getAttribute('data-q');
+      var val = btn.getAttribute('data-val');
+      if (q && val) selectOption(q, val, btn);
+    });
+  });
+
+  // Nav buttons (next / prev / results) — delegated from quiz-wrap
+  document.querySelector('.quiz-wrap').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var action = btn.getAttribute('data-action');
+    var from = btn.getAttribute('data-from');
+    if (action === 'next' && from) nextQ(parseInt(from));
+    else if (action === 'prev' && from) prevQ(parseInt(from));
+    else if (action === 'results') showResults();
+  });
+
+  updateProgress();
+});
+</script>
+</body>
+</html>
