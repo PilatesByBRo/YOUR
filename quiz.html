@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>YOUR Pilates | Βρες τη Μέθοδο Γυμναστικής σου</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --cream: #f0ece3;
+    --cream-dim: #c8c4bc;
+    --white: #f5f2ed;
+    --lime: #c8f135;
+    --orange: #ff6b35;
+    --gray: #161616;
+    --gray2: #1e1e1e;
+    --gray3: #2a2a2a;
+    --text-muted: #777;
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  button { cursor: pointer; font-family: 'Montserrat', sans-serif; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* iOS Safari: use visibility+opacity instead of display:none */
+  .page-section {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .page-section.active {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  /* ═══ HEADER ═══ */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    border-bottom: 1px solid #1c1c1c;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.97);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .logo-svg-wrap { display: flex; align-items: center; gap: 14px; }
+  .logo-circle-svg { width: 52px; height: 52px; }
+
+  .logo-text-block { display: flex; flex-direction: column; }
+  .logo-pilates {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+  }
+  .logo-bro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .logo-bro span { font-weight: 300; font-size: 18px; }
+  .logo-your-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  .lang-toggle {
+    display: flex;
+    background: var(--gray2);
+    border-radius: 30px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .lang-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 26px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--text-muted);
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 36px;
+    touch-action: manipulation;
+  }
+  .lang-btn.active { background: var(--cream); color: var(--black); }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    padding: 80px 40px 70px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-logo-large {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 44px;
+  }
+  .hero-logo-large svg { width: 120px; height: 120px; }
+
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(54px, 9vw, 96px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--lime);
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .hero p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 48px;
+  }
+
+  .start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 18px 44px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    min-height: 56px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .start-btn:active { transform: scale(0.98); background: var(--lime); }
+
+  /* ═══ PROGRESS ═══ */
+  .progress-bar-wrap {
+    max-width: 700px;
+    margin: 0 auto 44px;
+    padding: 0 40px;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .progress-track {
+    height: 2px;
+    background: #222;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--cream);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ═══ QUESTIONNAIRE ═══ */
+  .quiz-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+  }
+
+  .question-block { display: none; }
+  .question-block.active {
+    display: block;
+    animation: fadeUp 0.35s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.6;
+  }
+
+  .q-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 400;
+    letter-spacing: 0px;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .q-subtitle {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .multi-note {
+    font-size: 10px;
+    color: var(--lime);
+    margin-bottom: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .options-grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .options-grid.two-col { grid-template-columns: 1fr 1fr; }
+  .options-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+  .option-btn {
+    background: var(--gray);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    color: var(--white);
+    font-size: 13px;
+    line-height: 1.4;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    min-height: 54px;
+    width: 100%;
+  }
+  .option-btn:active { background: #202020; }
+  .option-btn.selected {
+    border-color: var(--cream);
+    background: rgba(240,236,227,0.07);
+    color: var(--cream);
+  }
+
+  .option-btn .opt-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+  .option-btn .opt-label { font-weight: 600; display: block; font-size: 13px; }
+  .option-btn .opt-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-top: 3px;
+    display: block;
+    line-height: 1.4;
+  }
+  .option-btn.selected .opt-desc { color: rgba(240,236,227,0.45); }
+
+  /* Nav buttons */
+  .nav-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-next {
+    background: var(--cream);
+    color: var(--black);
+    border: none;
+    border-radius: 50px;
+    padding: 16px 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    min-height: 52px;
+    transition: background 0.2s;
+  }
+  .btn-next:disabled { opacity: 0.25; cursor: not-allowed; }
+  .btn-next:not(:disabled):active { background: var(--lime); }
+
+  .btn-back {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid #2a2a2a;
+    border-radius: 50px;
+    padding: 16px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    min-height: 52px;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-back:active { color: var(--white); border-color: #444; }
+
+  /* ═══ RESULTS ═══ */
+  #results-section { padding: 60px 40px; max-width: 900px; margin: 0 auto; }
+
+  .results-header { margin-bottom: 50px; }
+  .results-header .tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.6;
+  }
+  .results-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 7vw, 72px);
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .results-header h2 em { font-style: italic; color: var(--lime); }
+  .results-header p { color: var(--text-muted); font-size: 14px; font-weight: 300; line-height: 1.7; }
+
+  .profile-card {
+    background: var(--gray);
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--cream);
+  }
+  .profile-card .profile-type {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .profile-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+  }
+  .profile-card .reason {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .methods-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .method-tag {
+    background: rgba(240,236,227,0.08);
+    border: 1px solid rgba(240,236,227,0.2);
+    color: var(--cream);
+    border-radius: 30px;
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .method-tag.secondary {
+    background: rgba(255,107,53,0.08);
+    border-color: rgba(255,107,53,0.25);
+    color: var(--orange);
+  }
+  .method-tag.dynamic-pilates-tag {
+    background: rgba(200,241,53,0.1);
+    border-color: rgba(200,241,53,0.3);
+    color: var(--lime);
+  }
+
+  .methods-detail { margin-top: 48px; }
+  .methods-detail h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+    color: var(--text-muted);
+  }
+
+  .method-detail-card {
+    background: var(--gray);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .method-detail-card.featured {
+    border: 1px solid rgba(200,241,53,0.2);
+    background: rgba(200,241,53,0.03);
+  }
+  .method-detail-card .m-icon { font-size: 28px; min-width: 40px; }
+  .method-detail-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .method-detail-card .featured-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .intensity-badge {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .intensity-low    { background: rgba(240,236,227,0.08); color: var(--cream-dim); }
+  .intensity-medium { background: rgba(255,165,0,0.12);   color: #ffa500; }
+  .intensity-high   { background: rgba(255,107,53,0.12);  color: var(--orange); }
+  .intensity-dynamic { background: rgba(200,241,53,0.12); color: var(--lime); }
+
+  .pros-list { list-style: none; }
+  .pros-list li {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    padding: 3px 0;
+    line-height: 1.5;
+  }
+  .pros-list li::before { content: '→ '; color: var(--cream-dim); }
+
+  .restart-btn {
+    margin-top: 50px;
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid #333;
+    border-radius: 50px;
+    padding: 16px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    min-height: 52px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .restart-btn:active { border-color: #555; }
+
+  /* Footer brand strip */
+  .results-brand {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #1c1c1c;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .results-brand svg { width: 44px; height: 44px; opacity: 0.6; }
+  .results-brand-text {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 600px) {
+    header { padding: 14px 18px; }
+    .logo-circle-svg { width: 42px; height: 42px; }
+    .hero { padding: 44px 20px 44px; }
+    .hero-logo-large svg { width: 88px; height: 88px; }
+    .quiz-wrap { padding-left: 18px; padding-right: 18px; padding-bottom: 70px; }
+    #results-section { padding: 40px 18px; }
+    .progress-bar-wrap { padding: 0 18px; }
+    .options-grid.two-col,
+    .options-grid.three-col { grid-template-columns: 1fr; }
+    .method-detail-card { flex-direction: column; gap: 10px; }
+    .results-brand { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="logo-svg-wrap">
+    <!-- Circular YOUR Pilates by BRo logo — inline SVG -->
+    <svg class="logo-circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#f0ece3" stroke="#c8c4bc" stroke-width="0.6"/>
+      <!-- Curved top text: YOUR BODY'S BEST FRIEND -->
+      <path id="topArc" d="M 15,50 A 35,35 0 1,1 85,50" fill="none"/>
+      <text font-family="Montserrat,sans-serif" font-size="5.2" font-weight="400" letter-spacing="2.2" fill="#888">
+        <textPath href="#topArc" startOffset="8%">YOUR BODY'S BEST FRIEND</textPath>
+      </text>
+      <!-- Horizontal lines -->
+      <line x1="18" y1="54" x2="82" y2="54" stroke="#b8b4ac" stroke-width="0.4"/>
+      <line x1="18" y1="70" x2="82" y2="70" stroke="#b8b4ac" stroke-width="0.4"/>
+      <!-- PILATES BY BRo -->
+      <text x="50" y="46" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" font-weight="400" letter-spacing="4" fill="#555">PILATES</text>
+      <text x="50" y="52" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="4.5" font-weight="300" letter-spacing="3" fill="#888">BY</text>
+      <text x="50" y="59.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9.5" font-weight="700" letter-spacing="0.5" fill="#1a1a1a">BR<tspan font-weight="300" font-size="8">o</tspan></text>
+      <!-- YOUR large outline letters approximated -->
+      <text x="50" y="69" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="17" font-weight="300" letter-spacing="3" fill="none" stroke="#555" stroke-width="0.5">YOUR</text>
+      <!-- Bottom arc: PALAIO FALIRO · ATHENS -->
+      <path id="botArc" d="M 20,70 A 30,30 0 0,0 80,70" fill="none"/>
+      <text font-family="Montserrat,sans-serif" font-size="4.5" font-weight="300" letter-spacing="2" fill="#aaa">
+        <textPath href="#botArc" startOffset="5%">PALAIO FALIRO · ATHENS</textPath>
+      </text>
+      <!-- YOUR OWN UNIQUE RECIPE row -->
+      <text x="21" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">YOUR</text>
+      <text x="38" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">OWN</text>
+      <text x="53.5" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">UNIQUE</text>
+      <text x="72" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">RECIPE</text>
+      <!-- separators -->
+      <line x1="34.5" y1="71.5" x2="34.5" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+      <line x1="51" y1="71.5" x2="51" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+      <line x1="70.5" y1="71.5" x2="70.5" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+      <!-- dot -->
+      <circle cx="84" cy="18" r="1.2" fill="#888"/>
+    </svg>
+    <div class="logo-text-block">
+      <span class="logo-pilates">Pilates</span>
+      <div class="logo-bro">BR<span>o</span></div>
+      <span class="logo-your-sub">Your Own Unique Recipe</span>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-el">ΕΛ</button>
+    <button class="lang-btn" id="btn-en">EN</button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero-section" class="page-section active">
+  <div class="hero">
+    <div class="hero-logo-large">
+      <!-- Large logo in hero -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="#f0ece3" stroke="#c8c4bc" stroke-width="0.6"/>
+        <path id="topArcHero" d="M 15,50 A 35,35 0 1,1 85,50" fill="none"/>
+        <text font-family="Montserrat,sans-serif" font-size="5.2" font-weight="400" letter-spacing="2.2" fill="#888">
+          <textPath href="#topArcHero" startOffset="8%">YOUR BODY'S BEST FRIEND</textPath>
+        </text>
+        <line x1="18" y1="54" x2="82" y2="54" stroke="#b8b4ac" stroke-width="0.4"/>
+        <line x1="18" y1="70" x2="82" y2="70" stroke="#b8b4ac" stroke-width="0.4"/>
+        <text x="50" y="46" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" font-weight="400" letter-spacing="4" fill="#555">PILATES</text>
+        <text x="50" y="52" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="4.5" font-weight="300" letter-spacing="3" fill="#888">BY</text>
+        <text x="50" y="59.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9.5" font-weight="700" letter-spacing="0.5" fill="#1a1a1a">BR<tspan font-weight="300" font-size="8">o</tspan></text>
+        <text x="50" y="69" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="17" font-weight="300" letter-spacing="3" fill="none" stroke="#555" stroke-width="0.5">YOUR</text>
+        <path id="botArcHero" d="M 20,70 A 30,30 0 0,0 80,70" fill="none"/>
+        <text font-family="Montserrat,sans-serif" font-size="4.5" font-weight="300" letter-spacing="2" fill="#aaa">
+          <textPath href="#botArcHero" startOffset="5%">PALAIO FALIRO · ATHENS</textPath>
+        </text>
+        <text x="21" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">YOUR</text>
+        <text x="38" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">OWN</text>
+        <text x="53.5" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">UNIQUE</text>
+        <text x="72" y="74.5" font-family="Montserrat,sans-serif" font-size="3.8" font-weight="300" letter-spacing="1.5" fill="#aaa">RECIPE</text>
+        <line x1="34.5" y1="71.5" x2="34.5" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+        <line x1="51" y1="71.5" x2="51" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+        <line x1="70.5" y1="71.5" x2="70.5" y2="75.5" stroke="#bbb" stroke-width="0.3"/>
+        <circle cx="84" cy="18" r="1.2" fill="#888"/>
+      </svg>
+    </div>
+    <span class="hero-eyebrow" data-el="Ανακάλυψε τον εαυτό σου" data-en="Discover yourself">Ανακάλυψε τον εαυτό σου</span>
+    <h1>
+      <span data-el="Βρες τη" data-en="Find your">Βρες τη</span><br>
+      <em data-el="μέθοδο" data-en="perfect">μέθοδο</em><br>
+      <span data-el="γυμναστικής σου." data-en="method.">γυμναστικής σου.</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p data-el="Απάντησε σε μερικές ερωτήσεις και λάβε εξατομικευμένες προτάσεις βασισμένες στους στόχους, την εμπειρία και τις προτιμήσεις σου."
+       data-en="Answer a few questions and receive personalised workout recommendations based on your goals, experience, and preferences.">
+      Απάντησε σε μερικές ερωτήσεις και λάβε εξατομικευμένες προτάσεις βασισμένες στους στόχους, την εμπειρία και τις προτιμήσεις σου.
+    </p>
+    <button class="start-btn" id="start-btn">
+      <span data-el="Ξεκινάμε" data-en="Let's go">Ξεκινάμε</span>
+      <span>→</span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══ QUIZ ═══ -->
+<section id="quiz-section" class="page-section">
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <span id="progress-label">1 / 8</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- Q1: Goals (multi) -->
+    <div class="question-block active" id="q1">
+      <div class="q-section-label" data-el="Α — Στόχοι" data-en="A — Goals">Α — Στόχοι</div>
+      <div class="q-title" data-el="Ποιοι είναι οι στόχοι σου;" data-en="What are your goals?">Ποιοι είναι οι στόχοι σου;</div>
+      <div class="q-subtitle" data-el="Μπορείς να επιλέξεις περισσότερα από ένα." data-en="You can select more than one.">Μπορείς να επιλέξεις περισσότερα από ένα.</div>
+      <div class="multi-note" data-el="✦ Πολλαπλή επιλογή" data-en="✦ Multiple choice">✦ Πολλαπλή επιλογή</div>
+      <div class="options-grid two-col" id="q1-options">
+        <button class="option-btn" data-q="q1" data-val="weight_loss">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label" data-el="Απώλεια βάρους" data-en="Weight loss">Απώλεια βάρους</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="muscle">
+          <span class="opt-icon">💪</span>
+          <span class="opt-label" data-el="Αύξηση μυϊκής μάζας" data-en="Build muscle">Αύξηση μυϊκής μάζας</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="toning">
+          <span class="opt-icon">✨</span>
+          <span class="opt-label" data-el="Γράμμωση" data-en="Toning">Γράμμωση</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="endurance">
+          <span class="opt-icon">🏃</span>
+          <span class="opt-label" data-el="Βελτίωση αντοχής" data-en="Improve endurance">Βελτίωση αντοχής</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="stress">
+          <span class="opt-icon">🧘</span>
+          <span class="opt-label" data-el="Μείωση άγχους / στρες" data-en="Reduce stress">Μείωση άγχους / στρες</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="flexibility">
+          <span class="opt-icon">🤸</span>
+          <span class="opt-label" data-el="Ευλυγισία & Κινητικότητα" data-en="Flexibility & Mobility">Ευλυγισία & Κινητικότητα</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="rehab">
+          <span class="opt-icon">🩺</span>
+          <span class="opt-label" data-el="Αποκατάσταση / Ήπια άσκηση" data-en="Rehab / Gentle exercise">Αποκατάσταση / Ήπια άσκηση</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="fun">
+          <span class="opt-icon">🎉</span>
+          <span class="opt-label" data-el="Διασκέδαση & Κοινωνικότητα" data-en="Fun & Socializing">Διασκέδαση & Κοινωνικότητα</span>
+        </button>
+        <button class="option-btn" data-q="q1" data-val="posture" style="grid-column:1/-1">
+          <span class="opt-icon">🧍</span>
+          <span class="opt-label" data-el="Βελτίωση στάσης σώματος" data-en="Better posture & body alignment">Βελτίωση στάσης σώματος</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-next" id="q1-next" data-action="next" data-from="1" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q2: Fitness Level -->
+    <div class="question-block" id="q2">
+      <div class="q-section-label" data-el="Β — Φυσική Κατάσταση" data-en="B — Fitness Level">Β — Φυσική Κατάσταση</div>
+      <div class="q-title" data-el="Ποιο είναι το τρέχον επίπεδό σου;" data-en="What is your current fitness level?">Ποιο είναι το τρέχον επίπεδό σου;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid" id="q2-options">
+        <button class="option-btn" data-q="q2" data-val="beginner_zero">
+          <span class="opt-icon">🌱</span>
+          <span class="opt-label" data-el="Πολύ αρχάριος" data-en="Complete beginner">Πολύ αρχάριος</span>
+          <span class="opt-desc" data-el="Δεν ασκούμαι σχεδόν καθόλου" data-en="I barely exercise at all">Δεν ασκούμαι σχεδόν καθόλου</span>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="beginner">
+          <span class="opt-icon">🚶</span>
+          <span class="opt-label" data-el="Αρχάριος" data-en="Beginner">Αρχάριος</span>
+          <span class="opt-desc" data-el="Ασκούμαι μερικές φορές τον μήνα" data-en="I exercise a few times a month">Ασκούμαι μερικές φορές τον μήνα</span>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="intermediate">
+          <span class="opt-icon">🏋️</span>
+          <span class="opt-label" data-el="Μέτριος" data-en="Intermediate">Μέτριος</span>
+          <span class="opt-desc" data-el="Ασκούμαι 2–3 φορές/εβδομάδα" data-en="I work out 2–3 times/week">Ασκούμαι 2–3 φορές/εβδομάδα</span>
+        </button>
+        <button class="option-btn" data-q="q2" data-val="advanced">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-label" data-el="Προχωρημένος" data-en="Advanced">Προχωρημένος</span>
+          <span class="opt-desc" data-el="Ασκούμαι 4–5+ φορές/εβδομάδα" data-en="I work out 4–5+ times/week">Ασκούμαι 4–5+ φορές/εβδομάδα</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="2" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q2-next" data-action="next" data-from="2" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q3: Gym experience -->
+    <div class="question-block" id="q3">
+      <div class="q-section-label" data-el="Β — Εμπειρία" data-en="B — Experience">Β — Εμπειρία</div>
+      <div class="q-title" data-el="Έχεις εμπειρία σε κάποια μέθοδο;" data-en="Do you have experience with any method?">Έχεις εμπειρία σε κάποια μέθοδο;</div>
+      <div class="q-subtitle" data-el="Πόσο καιρό ασκείσαι συστηματικά;" data-en="How long have you been training systematically?">Πόσο καιρό ασκείσαι συστηματικά;</div>
+      <div class="options-grid" id="q3-options">
+        <button class="option-btn" data-q="q3" data-val="none">
+          <span class="opt-icon">🆕</span>
+          <span class="opt-label" data-el="Καθόλου — μόλις ξεκινάω" data-en="None — just starting">Καθόλου — μόλις ξεκινάω</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="under1y">
+          <span class="opt-icon">📅</span>
+          <span class="opt-label" data-el="Λιγότερο από 1 χρόνο" data-en="Less than 1 year">Λιγότερο από 1 χρόνο</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="1to3y">
+          <span class="opt-icon">💡</span>
+          <span class="opt-label" data-el="1–3 χρόνια" data-en="1–3 years">1–3 χρόνια</span>
+        </button>
+        <button class="option-btn" data-q="q3" data-val="over3y">
+          <span class="opt-icon">🏆</span>
+          <span class="opt-label" data-el="3+ χρόνια" data-en="3+ years">3+ χρόνια</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="3" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q3-next" data-action="next" data-from="3" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q4: Injuries -->
+    <div class="question-block" id="q4">
+      <div class="q-section-label" data-el="Γ — Υγεία & Περιορισμοί" data-en="C — Health & Limitations">Γ — Υγεία & Περιορισμοί</div>
+      <div class="q-title" data-el="Έχεις τραυματισμούς ή περιορισμούς;" data-en="Do you have injuries or limitations?">Έχεις τραυματισμούς ή περιορισμούς;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q4-options">
+        <button class="option-btn" data-q="q4" data-val="none">
+          <span class="opt-icon">✅</span>
+          <span class="opt-label" data-el="Όχι, είμαι καλά" data-en="No, I'm fine">Όχι, είμαι καλά</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="knees">
+          <span class="opt-icon">🦵</span>
+          <span class="opt-label" data-el="Ναι — γόνατα" data-en="Yes — knees">Ναι — γόνατα</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="back">
+          <span class="opt-icon">🦴</span>
+          <span class="opt-label" data-el="Ναι — μέση / πλάτη" data-en="Yes — back / spine">Ναι — μέση / πλάτη</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="shoulders">
+          <span class="opt-icon">🫸</span>
+          <span class="opt-label" data-el="Ναι — ώμοι" data-en="Yes — shoulders">Ναι — ώμοι</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="hips">
+          <span class="opt-icon">🦷</span>
+          <span class="opt-label" data-el="Ναι — ισχία" data-en="Yes — hips">Ναι — ισχία</span>
+        </button>
+        <button class="option-btn" data-q="q4" data-val="general">
+          <span class="opt-icon">⚠️</span>
+          <span class="opt-label" data-el="Ναι — θέλω γενικά ήπια άσκηση" data-en="Yes — gentle exercise generally">Ναι — θέλω γενικά ήπια άσκηση</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="4" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q4-next" data-action="next" data-from="4" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q5: Style (multi) -->
+    <div class="question-block" id="q5">
+      <div class="q-section-label" data-el="Δ — Προτιμήσεις" data-en="D — Preferences">Δ — Προτιμήσεις</div>
+      <div class="q-title" data-el="Τι σου αρέσει στην άσκηση;" data-en="What do you enjoy about exercise?">Τι σου αρέσει στην άσκηση;</div>
+      <div class="q-subtitle" data-el="Μπορείς να επιλέξεις περισσότερα από ένα." data-en="You can select more than one.">Μπορείς να επιλέξεις περισσότερα από ένα.</div>
+      <div class="multi-note" data-el="✦ Πολλαπλή επιλογή" data-en="✦ Multiple choice">✦ Πολλαπλή επιλογή</div>
+      <div class="options-grid two-col" id="q5-options">
+        <button class="option-btn" data-q="q5" data-val="full_body">
+          <span class="opt-icon">🌀</span>
+          <span class="opt-label" data-el="Να κινείται όλο το σώμα" data-en="Full body movement">Να κινείται όλο το σώμα</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="targeted">
+          <span class="opt-icon">🎯</span>
+          <span class="opt-label" data-el="Στοχευμένες μυϊκές ομάδες" data-en="Targeted muscle groups">Στοχευμένες μυϊκές ομάδες</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="rhythm">
+          <span class="opt-icon">🎵</span>
+          <span class="opt-label" data-el="Ρυθμός & χορός" data-en="Rhythm & dance">Ρυθμός & χορός</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="skill">
+          <span class="opt-icon">🤹</span>
+          <span class="opt-label" data-el="Τεχνική & δεξιοτεχνία" data-en="Technique & skill">Τεχνική & δεξιοτεχνία</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="social">
+          <span class="opt-icon">👥</span>
+          <span class="opt-label" data-el="Ομαδική ατμόσφαιρα" data-en="Group atmosphere">Ομαδική ατμόσφαιρα</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="flow">
+          <span class="opt-icon">🌊</span>
+          <span class="opt-label" data-el="Ελεύθερη ροή / flow" data-en="Free flow movement">Ελεύθερη ροή / flow</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="outdoor">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-label" data-el="Ύπαιθρος / Φύση" data-en="Outdoors / Nature">Ύπαιθρος / Φύση</span>
+        </button>
+        <button class="option-btn" data-q="q5" data-val="competitive">
+          <span class="opt-icon">🏅</span>
+          <span class="opt-label" data-el="Ανταγωνιστικό στοιχείο" data-en="Competitive element">Ανταγωνιστικό στοιχείο</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="5" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q5-next" data-action="next" data-from="5" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q6: Location -->
+    <div class="question-block" id="q6">
+      <div class="q-section-label" data-el="Δ — Χώρος άσκησης" data-en="D — Exercise location">Δ — Χώρος άσκησης</div>
+      <div class="q-title" data-el="Πού προτιμάς να γυμνάζεσαι;" data-en="Where do you prefer to exercise?">Πού προτιμάς να γυμνάζεσαι;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid two-col" id="q6-options">
+        <button class="option-btn" data-q="q6" data-val="gym">
+          <span class="opt-icon">🏢</span>
+          <span class="opt-label" data-el="Γυμναστήριο" data-en="Gym">Γυμναστήριο</span>
+          <span class="opt-desc" data-el="Με εξοπλισμό & δομή" data-en="With equipment & structure">Με εξοπλισμό & δομή</span>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="home">
+          <span class="opt-icon">🏠</span>
+          <span class="opt-label" data-el="Σπίτι" data-en="Home">Σπίτι</span>
+          <span class="opt-desc" data-el="Χωρίς μετακίνηση" data-en="No commute needed">Χωρίς μετακίνηση</span>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="outdoor">
+          <span class="opt-icon">🌳</span>
+          <span class="opt-label" data-el="Εξωτερικός χώρος" data-en="Outdoors">Εξωτερικός χώρος</span>
+          <span class="opt-desc" data-el="Πάρκο, παραλία, δρόμος" data-en="Park, beach, street">Πάρκο, παραλία, δρόμος</span>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="studio">
+          <span class="opt-icon">🎭</span>
+          <span class="opt-label" data-el="Studio / Ειδικός χώρος" data-en="Studio / Specialised space">Studio / Ειδικός χώρος</span>
+          <span class="opt-desc" data-el="Pilates, yoga studio, πισίνα" data-en="Pilates, yoga studio, pool">Pilates, yoga studio, πισίνα</span>
+        </button>
+        <button class="option-btn" data-q="q6" data-val="no_pref" style="grid-column:1/-1">
+          <span class="opt-icon">🔀</span>
+          <span class="opt-label" data-el="Δεν με πειράζει — οτιδήποτε" data-en="No preference — anything goes">Δεν με πειράζει — οτιδήποτε</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="6" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q6-next" data-action="next" data-from="6" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q7: Time -->
+    <div class="question-block" id="q7">
+      <div class="q-section-label" data-el="Ε — Χρόνος & Συχνότητα" data-en="E — Time & Frequency">Ε — Χρόνος & Συχνότητα</div>
+      <div class="q-title" data-el="Πόσο χρόνο έχεις ανά προπόνηση;" data-en="How much time per workout?">Πόσο χρόνο έχεις ανά προπόνηση;</div>
+      <div class="q-subtitle" data-el="Διάλεξε ένα." data-en="Choose one.">Διάλεξε ένα.</div>
+      <div class="options-grid" id="q7-options">
+        <button class="option-btn" data-q="q7" data-val="short">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-label" data-el="15–25 λεπτά" data-en="15–25 minutes">15–25 λεπτά</span>
+          <span class="opt-desc" data-el="Λίγος χρόνος, υψηλή ένταση" data-en="Short time, high intensity">Λίγος χρόνος, υψηλή ένταση</span>
+        </button>
+        <button class="option-btn" data-q="q7" data-val="medium">
+          <span class="opt-icon">⏱️</span>
+          <span class="opt-label" data-el="30–45 λεπτά" data-en="30–45 minutes">30–45 λεπτά</span>
+          <span class="opt-desc" data-el="Ισορροπία ποιότητας & χρόνου" data-en="Balance of quality and time">Ισορροπία ποιότητας & χρόνου</span>
+        </button>
+        <button class="option-btn" data-q="q7" data-val="long">
+          <span class="opt-icon">🕐</span>
+          <span class="opt-label" data-el="60+ λεπτά" data-en="60+ minutes">60+ λεπτά</span>
+          <span class="opt-desc" data-el="Πλήρης προπόνηση χωρίς βιασύνη" data-en="Full workout, no rush">Πλήρης προπόνηση χωρίς βιασύνη</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="7" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q7-next" data-action="next" data-from="7" disabled
+          data-el="Συνέχεια →" data-en="Continue →">Συνέχεια →</button>
+      </div>
+    </div>
+
+    <!-- Q8: Motivation (multi) -->
+    <div class="question-block" id="q8">
+      <div class="q-section-label" data-el="Ζ — Ψυχολογία & Κίνητρο" data-en="F — Psychology & Motivation">Ζ — Ψυχολογία & Κίνητρο</div>
+      <div class="q-title" data-el="Τι σε παρακινεί περισσότερο;" data-en="What motivates you most?">Τι σε παρακινεί περισσότερο;</div>
+      <div class="q-subtitle" data-el="Μπορείς να επιλέξεις περισσότερα από ένα." data-en="You can select more than one.">Μπορείς να επιλέξεις περισσότερα από ένα.</div>
+      <div class="multi-note" data-el="✦ Πολλαπλή επιλογή" data-en="✦ Multiple choice">✦ Πολλαπλή επιλογή</div>
+      <div class="options-grid two-col" id="q8-options">
+        <button class="option-btn" data-q="q8" data-val="progress_skill">
+          <span class="opt-icon">📈</span>
+          <span class="opt-label" data-el="Πρόοδος σε δεξιότητες" data-en="Skill progression">Πρόοδος σε δεξιότητες</span>
+          <span class="opt-desc" data-el="π.χ. πρώτο pull-up, muscle-up" data-en="e.g. first pull-up, muscle-up">π.χ. πρώτο pull-up, muscle-up</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="burn_calories">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label" data-el="Μεγάλη καύση θερμίδων" data-en="Burning lots of calories">Μεγάλη καύση θερμίδων</span>
+          <span class="opt-desc" data-el="Να νιώθω ότι «δούλεψα» πραγματικά" data-en="I want to feel I really worked">Να νιώθω ότι «δούλεψα» πραγματικά</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="relax">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-label" data-el="Χαλάρωση & ισορροπία" data-en="Relaxation & balance">Χαλάρωση & ισορροπία</span>
+          <span class="opt-desc" data-el="Να ηρεμεί το μυαλό μου" data-en="To calm my mind">Να ηρεμεί το μυαλό μου</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="competition">
+          <span class="opt-icon">🏆</span>
+          <span class="opt-label" data-el="Συναγωνισμός" data-en="Competition">Συναγωνισμός</span>
+          <span class="opt-desc" data-el="Αγώνες, σκορ, beat τα limits" data-en="Matches, scores, beat limits">Αγώνες, σκορ, beat τα limits</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="aesthetics">
+          <span class="opt-icon">💎</span>
+          <span class="opt-label" data-el="Αισθητική βελτίωση" data-en="Aesthetic improvement">Αισθητική βελτίωση</span>
+          <span class="opt-desc" data-el="Να δείχνω καλύτερα, γράμμωση" data-en="Look better, toning">Να δείχνω καλύτερα, γράμμωση</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="fun_only">
+          <span class="opt-icon">😄</span>
+          <span class="opt-label" data-el="Διασκέδαση πάνω απ' όλα" data-en="Fun above all">Διασκέδαση πάνω απ' όλα</span>
+          <span class="opt-desc" data-el="Αν δεν περνάω καλά, δεν πάω" data-en="If it's not fun, I won't go">Αν δεν περνάω καλά, δεν πάω</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="health">
+          <span class="opt-icon">❤️</span>
+          <span class="opt-label" data-el="Υγεία & Ευεξία" data-en="Health & Wellbeing">Υγεία & Ευεξία</span>
+          <span class="opt-desc" data-el="Να είμαι υγιής μακροπρόθεσμα" data-en="Long-term health">Να είμαι υγιής μακροπρόθεσμα</span>
+        </button>
+        <button class="option-btn" data-q="q8" data-val="social_connect">
+          <span class="opt-icon">🤝</span>
+          <span class="opt-label" data-el="Κοινωνικές σχέσεις" data-en="Social connection">Κοινωνικές σχέσεις</span>
+          <span class="opt-desc" data-el="Να γνωρίσω κόσμο, παρέα" data-en="Meet people, company">Να γνωρίσω κόσμο, παρέα</span>
+        </button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" data-action="prev" data-from="8" data-el="← Πίσω" data-en="← Back">← Πίσω</button>
+        <button class="btn-next" id="q8-next" data-action="results" disabled
+          data-el="Δες τα αποτελέσματα 🎯" data-en="See results 🎯">Δες τα αποτελέσματα 🎯</button>
+      </div>
+    </div>
+
+  </div><!-- /.quiz-wrap -->
+</section>
+
+<!-- ═══ RESULTS ═══ -->
+<section id="results-section" class="page-section">
+  <div style="max-width:900px;margin:0 auto;padding:60px 40px;">
+    <div class="results-header">
+      <span class="tag" data-el="Τα αποτελέσματά σου" data-en="Your results">Τα αποτελέσματά σου</span>
+      <h2><em data-el="Η μέθοδός" data-en="Your">Η μέθοδός</em> <span data-el="σου." data-en="method.">σου.</span></h2>
+      <p id="results-intro"></p>
+    </div>
+    <div id="results-content"></div>
+    <div class="results-brand">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="#f0ece3" stroke="#c8c4bc" stroke-width="0.6"/>
+        <text x="50" y="46" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" font-weight="400" letter-spacing="4" fill="#555">PILATES</text>
+        <text x="50" y="52" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="4.5" font-weight="300" letter-spacing="3" fill="#888">BY</text>
+        <text x="50" y="59.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9.5" font-weight="700" letter-spacing="0.5" fill="#1a1a1a">BR<tspan font-weight="300" font-size="8">o</tspan></text>
+        <line x1="18" y1="54" x2="82" y2="54" stroke="#b8b4ac" stroke-width="0.4"/>
+      </svg>
+      <span class="results-brand-text" data-el="YOUR Pilates by BRo — Palaio Faliro, Athens" data-en="YOUR Pilates by BRo — Palaio Faliro, Athens">YOUR Pilates by BRo — Palaio Faliro, Athens</span>
+    </div>
+    <button class="restart-btn" id="restart-btn" data-el="← Ξεκίνα ξανά" data-en="← Start over">← Ξεκίνα ξανά</button>
+  </div>
+</section>
+
+<script>
+// ══════════════════════════════════════════
+// DATA — 12 methods (Dynamic Pilates fully added)
+// ══════════════════════════════════════════
+var METHODS = {
+  walking: { icon:'🚶', intensity:'low', isDynamic: false,
+    el:{ name:'Περπάτημα / Γρήγορο Περπάτημα', intensity_label:'Χαμηλή',
+         pros:['Ιδανικό για αρχάριους','Βελτιώνει καρδιοαγγειακή υγεία','Χαμηλή επιβάρυνση στις αρθρώσεις','Μειώνει το στρες','Δεν χρειάζεται εξοπλισμός'] },
+    en:{ name:'Walking / Brisk Walking', intensity_label:'Low',
+         pros:['Ideal for beginners','Improves cardiovascular health','Low joint impact','Reduces stress','No equipment needed'] } },
+
+  running: { icon:'🏃', intensity:'high', isDynamic: false,
+    el:{ name:'Τρέξιμο / Jogging', intensity_label:'Μεσαία–Υψηλή',
+         pros:['Αυξάνει αντοχή','Καίει πολλές θερμίδες','Βελτιώνει υγεία καρδιάς','Βοηθά στην απώλεια βάρους'] },
+    en:{ name:'Running / Jogging', intensity_label:'Medium–High',
+         pros:['Increases endurance','Burns many calories','Improves heart health','Helps with weight loss'] } },
+
+  cycling: { icon:'🚴', intensity:'medium', isDynamic: false,
+    el:{ name:'Ποδηλασία', intensity_label:'Μεσαία',
+         pros:['Ενδυναμώνει πόδια & γλουτούς','Βελτιώνει αντοχή','Χαμηλή επιβάρυνση για γόνατα','Κατάλληλη για εξωτερικούς χώρους'] },
+    en:{ name:'Cycling', intensity_label:'Medium',
+         pros:['Strengthens legs & glutes','Improves endurance','Low knee impact','Great for outdoors'] } },
+
+  swimming: { icon:'🏊', intensity:'medium', isDynamic: false,
+    el:{ name:'Κολύμβηση', intensity_label:'Μεσαία',
+         pros:['Προπονεί όλο το σώμα','Ελάχιστη καταπόνηση αρθρώσεων','Ιδανική για τραυματισμούς','Βελτιώνει αναπνευστική ικανότητα'] },
+    en:{ name:'Swimming', intensity_label:'Medium',
+         pros:['Full body workout','Minimal joint stress','Ideal for injuries','Improves respiratory capacity'] } },
+
+  pilates: { icon:'🧘', intensity:'low', isDynamic: false,
+    el:{ name:'Pilates (Mat / Reformer)', intensity_label:'Χαμηλή–Μεσαία',
+         pros:['Ενδυναμώνει τον κορμό','Βελτιώνει στάση σώματος','Αυξάνει ευλυγισία','Ιδανικό για αποκατάσταση','Κατάλληλο για όλα τα επίπεδα'] },
+    en:{ name:'Pilates (Mat / Reformer)', intensity_label:'Low–Medium',
+         pros:['Strengthens the core','Improves posture','Increases flexibility','Ideal for rehabilitation','Suitable for all levels'] } },
+
+  dynamic_pilates: { icon:'⚡', intensity:'medium-high', isDynamic: true,
+    el:{ name:'Dynamic Pilates', intensity_label:'Μεσαία–Υψηλή',
+         pros:['Core stability σε κίνηση','Δύναμη & ισχύς (ταχείες μυϊκές ίνες)','Καύση θερμίδων & cardio αποτέλεσμα','Ευλυγισία υπό φόρτιση','Βελτίωση ισορροπίας & συντονισμού','Ψυχολογική διέγερση — λιγότερη πιθανότητα πλήξης','Κατάλληλο για αποκατάσταση & πρόληψη τραυματισμών'] },
+    en:{ name:'Dynamic Pilates', intensity_label:'Medium–High',
+         pros:['Core stability in motion','Strength & power (fast-twitch muscles)','Calorie burn & cardio results','Flexibility under load','Improved balance & coordination','Mentally engaging — less chance of boredom','Suitable for rehab & injury prevention'] } },
+
+  yoga: { icon:'🧘‍♀️', intensity:'low', isDynamic: false,
+    el:{ name:'Yoga', intensity_label:'Χαμηλή–Μεσαία',
+         pros:['Μειώνει άγχος & στρες','Αυξάνει ευλυγισία','Ενισχύει ισορροπία','Βελτιώνει αναπνοή & συγκέντρωση'] },
+    en:{ name:'Yoga', intensity_label:'Low–Medium',
+         pros:['Reduces anxiety & stress','Increases flexibility','Improves balance','Better breathing & focus'] } },
+
+  hiit: { icon:'🔥', intensity:'high', isDynamic: false,
+    el:{ name:'HIIT', intensity_label:'Υψηλή',
+         pros:['Μεγάλη καύση σε λίγο χρόνο','Αυξάνει μεταβολισμό για ώρες','Ενισχύει αντοχή & δύναμη','Ιδανικό για πολυάσχολους'] },
+    en:{ name:'HIIT', intensity_label:'High',
+         pros:['Big calorie burn in little time','Boosts metabolism for hours','Improves endurance & strength','Ideal for busy schedules'] } },
+
+  weights: { icon:'🏋️', intensity:'high', isDynamic: false,
+    el:{ name:'Ασκήσεις με Βάρη / Μυϊκή Ενδυνάμωση', intensity_label:'Μεσαία–Υψηλή',
+         pros:['Αυξάνει μυϊκή μάζα','Ενισχύει οστά & αρθρώσεις','Αυξάνει βασικό μεταβολισμό','Βοηθά στην απώλεια λίπους μακροπρόθεσμα'] },
+    en:{ name:'Weight Training', intensity_label:'Medium–High',
+         pros:['Increases muscle mass','Strengthens bones & joints','Raises base metabolism','Long-term fat loss'] } },
+
+  crossfit: { icon:'🏋️‍♂️', intensity:'high', isDynamic: false,
+    el:{ name:'CrossFit', intensity_label:'Υψηλή',
+         pros:['Ενδυνάμωση όλου του σώματος','Συνδυάζει βάρη & cardio','Βελτιώνει εκρηκτικότητα & αντοχή','Δυναμικό & κοινωνικό περιβάλλον'] },
+    en:{ name:'CrossFit', intensity_label:'High',
+         pros:['Full body strength','Combines weights & cardio','Improves explosiveness & endurance','Dynamic & social environment'] } },
+
+  group: { icon:'💃', intensity:'medium', isDynamic: false,
+    el:{ name:'Ομαδικά Προγράμματα (Zumba, Aerobic, Dance)', intensity_label:'Μεσαία',
+         pros:['Διασκεδαστικά & ψυχολογικά ωφέλιμα','Καλό cardio','Βελτιώνουν ρυθμό & συντονισμό','Κατάλληλα για όλες τις ηλικίες'] },
+    en:{ name:'Group Classes (Zumba, Aerobics, Dance)', intensity_label:'Medium',
+         pros:['Fun & mentally beneficial','Good cardio','Improves rhythm & coordination','Suitable for all ages'] } },
+
+  calisthenics: { icon:'💪', intensity:'medium', isDynamic: false,
+    el:{ name:'Καλλισθενική (Calisthenics)', intensity_label:'Μεσαία–Υψηλή',
+         pros:['Χτίζει λειτουργική δύναμη','Δεν απαιτεί εξοπλισμό','Αναπτύσσει δυνατό κορμό','Ενισχύει ευλυγισία & κινητικότητα'] },
+    en:{ name:'Calisthenics', intensity_label:'Medium–High',
+         pros:['Builds functional strength','No equipment needed','Develops strong core','Improves flexibility & mobility'] } },
+
+  padel: { icon:'🎾', intensity:'medium', isDynamic: false,
+    el:{ name:'Padel / Tennis', intensity_label:'Μεσαία–Υψηλή',
+         pros:['Cardio χωρίς υπερβολική καταπόνηση','Βελτιώνει αντίδραση & ισορροπία','Κοινωνικό & ανταγωνιστικό','Ανάπτυξη τεχνικής δεξιότητας'] },
+    en:{ name:'Padel / Tennis', intensity_label:'Medium–High',
+         pros:['Cardio without excessive strain','Improves reaction & balance','Social & competitive','Develops technical skill'] } }
+};
+
+// ══════════════════════════════════════════
+// RECOMMENDATION ENGINE — Dynamic Pilates fully integrated
+// ══════════════════════════════════════════
+function getRecommendations(ans) {
+  var scores = {};
+  Object.keys(METHODS).forEach(function(k){ scores[k] = 0; });
+
+  // GOALS
+  var goals = ans.q1 || [];
+  goals.forEach(function(g){
+    if(g==='weight_loss')  { scores.hiit+=4; scores.running+=3; scores.cycling+=2; scores.group+=2; scores.crossfit+=2; scores.dynamic_pilates+=2; }
+    if(g==='muscle')       { scores.weights+=5; scores.calisthenics+=4; scores.crossfit+=2; scores.dynamic_pilates+=2; }
+    if(g==='toning')       { scores.calisthenics+=4; scores.pilates+=3; scores.dynamic_pilates+=4; scores.weights+=3; scores.hiit+=2; }
+    if(g==='endurance')    { scores.running+=4; scores.cycling+=3; scores.swimming+=3; scores.hiit+=2; scores.dynamic_pilates+=2; }
+    if(g==='stress')       { scores.yoga+=5; scores.swimming+=3; scores.walking+=3; scores.pilates+=3; scores.dynamic_pilates+=2; }
+    if(g==='flexibility')  { scores.yoga+=5; scores.pilates+=4; scores.dynamic_pilates+=4; scores.calisthenics+=2; }
+    if(g==='rehab')        { scores.pilates+=5; scores.swimming+=5; scores.yoga+=4; scores.walking+=3; scores.dynamic_pilates+=4; }
+    if(g==='fun')          { scores.padel+=5; scores.group+=5; scores.crossfit+=2; }
+    if(g==='posture')      { scores.pilates+=5; scores.dynamic_pilates+=5; scores.yoga+=3; scores.walking+=1; }
+  });
+
+  // FITNESS LEVEL
+  var lvl = ans.q2;
+  if(lvl==='beginner_zero'||lvl==='beginner'){
+    scores.hiit-=2; scores.crossfit-=3; scores.calisthenics-=1;
+    scores.walking+=2; scores.pilates+=2; scores.yoga+=2; scores.cycling+=1; scores.dynamic_pilates+=1;
+  }
+  if(lvl==='intermediate') { scores.dynamic_pilates+=2; scores.pilates+=1; }
+  if(lvl==='advanced')     { scores.crossfit+=2; scores.calisthenics+=2; scores.hiit+=1; scores.weights+=1; scores.dynamic_pilates+=2; }
+
+  // GYM EXPERIENCE
+  var exp = ans.q3;
+  if(exp==='none')   { scores.crossfit-=2; scores.weights-=1; scores.calisthenics-=1; scores.walking+=1; scores.yoga+=1; scores.pilates+=1; }
+  if(exp==='over3y') { scores.crossfit+=2; scores.weights+=2; scores.calisthenics+=2; scores.dynamic_pilates+=2; }
+
+  // INJURY
+  var inj = ans.q4;
+  if(inj==='knees')    { scores.running-=4; scores.hiit-=2; scores.crossfit-=2; scores.swimming+=3; scores.pilates+=3; scores.yoga+=2; scores.cycling+=3; scores.dynamic_pilates+=2; }
+  if(inj==='back')     { scores.weights-=2; scores.running-=2; scores.pilates+=5; scores.dynamic_pilates+=3; scores.swimming+=3; scores.yoga+=2; }
+  if(inj==='shoulders'){ scores.calisthenics-=3; scores.crossfit-=3; scores.weights-=2; scores.walking+=2; scores.cycling+=2; scores.pilates+=2; }
+  if(inj==='hips')     { scores.pilates+=4; scores.yoga+=3; scores.swimming+=3; scores.dynamic_pilates+=2; }
+  if(inj==='general')  { scores.hiit-=4; scores.crossfit-=4; scores.running-=3; scores.swimming+=4; scores.pilates+=5; scores.dynamic_pilates+=4; scores.yoga+=4; scores.walking+=4; }
+
+  // STYLE
+  var styles = ans.q5 || [];
+  styles.forEach(function(s){
+    if(s==='full_body')   { scores.crossfit+=2; scores.swimming+=2; scores.hiit+=2; scores.calisthenics+=1; scores.dynamic_pilates+=2; }
+    if(s==='targeted')    { scores.weights+=3; scores.calisthenics+=2; scores.pilates+=2; scores.dynamic_pilates+=2; }
+    if(s==='rhythm')      { scores.group+=4; scores.padel+=1; scores.dynamic_pilates+=1; }
+    if(s==='skill')       { scores.calisthenics+=3; scores.padel+=3; scores.yoga+=2; scores.dynamic_pilates+=2; }
+    if(s==='social')      { scores.group+=3; scores.padel+=3; scores.crossfit+=2; }
+    if(s==='flow')        { scores.yoga+=3; scores.pilates+=2; scores.dynamic_pilates+=4; }
+    if(s==='outdoor')     { scores.running+=3; scores.cycling+=3; scores.walking+=2; scores.calisthenics+=2; scores.padel+=1; }
+    if(s==='competitive') { scores.padel+=4; scores.crossfit+=2; scores.running+=1; }
+  });
+
+  // LOCATION
+  var loc = ans.q6;
+  if(loc==='gym')     { scores.weights+=3; scores.crossfit+=2; scores.hiit+=2; scores.group+=1; }
+  if(loc==='home')    { scores.hiit+=2; scores.yoga+=2; scores.pilates+=2; scores.calisthenics+=2; scores.dynamic_pilates+=1; }
+  if(loc==='outdoor') { scores.running+=3; scores.cycling+=3; scores.walking+=3; scores.calisthenics+=2; }
+  if(loc==='studio')  { scores.yoga+=3; scores.pilates+=4; scores.dynamic_pilates+=4; scores.group+=2; scores.swimming+=2; scores.padel+=2; }
+
+  // TIME
+  var t = ans.q7;
+  if(t==='short') { scores.hiit+=3; scores.calisthenics+=2; scores.running+=1; scores.dynamic_pilates+=2; }
+  if(t==='medium'){ scores.dynamic_pilates+=2; scores.pilates+=1; scores.yoga+=1; }
+  if(t==='long')  { scores.swimming+=2; scores.weights+=2; scores.yoga+=2; scores.pilates+=1; }
+
+  // MOTIVATION
+  var motives = ans.q8 || [];
+  motives.forEach(function(m){
+    if(m==='progress_skill') { scores.calisthenics+=3; scores.padel+=2; scores.weights+=1; scores.dynamic_pilates+=2; }
+    if(m==='burn_calories')  { scores.hiit+=3; scores.running+=2; scores.crossfit+=2; scores.dynamic_pilates+=2; }
+    if(m==='relax')          { scores.yoga+=3; scores.walking+=2; scores.swimming+=2; scores.pilates+=2; scores.dynamic_pilates+=1; }
+    if(m==='competition')    { scores.padel+=4; scores.crossfit+=2; scores.running+=1; }
+    if(m==='aesthetics')     { scores.weights+=3; scores.calisthenics+=2; scores.hiit+=2; scores.dynamic_pilates+=3; scores.pilates+=2; }
+    if(m==='fun_only')       { scores.group+=4; scores.padel+=3; scores.crossfit+=1; scores.dynamic_pilates+=1; }
+    if(m==='health')         { scores.walking+=2; scores.swimming+=2; scores.yoga+=2; scores.cycling+=1; scores.pilates+=2; scores.dynamic_pilates+=2; }
+    if(m==='social_connect') { scores.group+=4; scores.padel+=3; scores.crossfit+=2; }
+  });
+
+  // Clamp negatives
+  Object.keys(scores).forEach(function(k){ if(scores[k]<0) scores[k]=0; });
+
+  var sorted = Object.entries(scores).sort(function(a,b){ return b[1]-a[1]; });
+  var primary   = sorted.slice(0,3).filter(function(x){ return x[1]>0; }).map(function(x){ return x[0]; });
+  var secondary = sorted.slice(3,6).filter(function(x){ return x[1]>0; }).map(function(x){ return x[0]; });
+
+  return { primary: primary, secondary: secondary };
+}
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+var lang = 'el';
+var currentQ = 1;
+var totalQ = 8;
+var answers = {};
+var MULTI_QUESTIONS = ['q1','q5','q8'];
+
+// ══════════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════════
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-el').className = 'lang-btn' + (l==='el' ? ' active' : '');
+  document.getElementById('btn-en').className = 'lang-btn' + (l==='en' ? ' active' : '');
+  document.querySelectorAll('[data-el]').forEach(function(el){
+    el.textContent = el.getAttribute('data-' + l);
+  });
+  document.documentElement.lang = l;
+}
+
+// ══════════════════════════════════════════
+// SECTION SWITCHING (iOS-safe)
+// ══════════════════════════════════════════
+function showSection(id) {
+  document.querySelectorAll('.page-section').forEach(function(s){ s.classList.remove('active'); });
+  var target = document.getElementById(id);
+  requestAnimationFrame(function(){
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  });
+}
+
+// ══════════════════════════════════════════
+// QUIZ FLOW
+// ══════════════════════════════════════════
+function startQuiz() {
+  showSection('quiz-section');
+  updateProgress();
+}
+
+function selectOption(qId, value, btn) {
+  if (MULTI_QUESTIONS.indexOf(qId) !== -1) {
+    if (!answers[qId]) answers[qId] = [];
+    var idx = answers[qId].indexOf(value);
+    if (idx === -1) { answers[qId].push(value); btn.classList.add('selected'); }
+    else            { answers[qId].splice(idx,1); btn.classList.remove('selected'); }
+    var nextBtn = document.getElementById(qId+'-next');
+    if (nextBtn) nextBtn.disabled = (answers[qId].length === 0);
+  } else {
+    document.querySelectorAll('#'+qId+'-options .option-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    answers[qId] = value;
+    var nextBtn = document.getElementById(qId+'-next');
+    if (nextBtn) nextBtn.disabled = false;
+  }
+}
+
+function nextQ(from) {
+  document.getElementById('q'+from).classList.remove('active');
+  currentQ = from + 1;
+  document.getElementById('q'+currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function prevQ(from) {
+  document.getElementById('q'+from).classList.remove('active');
+  currentQ = from - 1;
+  document.getElementById('q'+currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function updateProgress() {
+  var pct = Math.round(((currentQ - 1) / totalQ) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = currentQ + ' / ' + totalQ;
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+
+// ══════════════════════════════════════════
+// RESULTS
+// ══════════════════════════════════════════
+function showResults() {
+  var rec = getRecommendations(answers);
+  var primary = rec.primary;
+  var secondary = rec.secondary;
+
+  var intros = {
+    el: 'Βάσει των απαντήσεών σου, αυτές είναι οι ιδανικές μέθοδοι γυμναστικής για σένα:',
+    en: 'Based on your answers, these are the ideal workout methods for you:'
+  };
+  document.getElementById('results-intro').textContent = intros[lang];
+
+  var html = '';
+
+  // Primary
+  html += '<div class="profile-card">'
+    + '<span class="profile-type">' + (lang==='el'?'✅ Κύριες Προτάσεις':'✅ Primary Recommendations') + '</span>'
+    + '<h3>' + (lang==='el'?'Η μέθοδός σου':'Your method') + '</h3>'
+    + '<p class="reason">' + (lang==='el'?'Αυτές οι μέθοδοι ταιριάζουν απόλυτα με τους στόχους, το επίπεδο και τις προτιμήσεις σου.':'These methods perfectly match your goals, level, and preferences.') + '</p>'
+    + '<div class="methods-list">'
+    + primary.map(function(k){
+        var cls = METHODS[k].isDynamic ? 'method-tag dynamic-pilates-tag' : 'method-tag';
+        return '<span class="'+cls+'">' + METHODS[k].icon + ' ' + METHODS[k][lang].name + '</span>';
+      }).join('')
+    + '</div></div>';
+
+  if (secondary.length > 0) {
+    html += '<div class="profile-card" style="border-left-color:var(--orange)">'
+      + '<span class="profile-type" style="color:var(--orange)">' + (lang==='el'?'🔄 Εναλλακτικές Επιλογές':'🔄 Alternative Options') + '</span>'
+      + '<h3>' + (lang==='el'?'Και επίσης...':'Also consider...') + '</h3>'
+      + '<p class="reason">' + (lang==='el'?'Καλές εναλλακτικές που μπορείς να συνδυάσεις.':'Good alternatives you can mix in.') + '</p>'
+      + '<div class="methods-list">'
+      + secondary.map(function(k){ return '<span class="method-tag secondary">' + METHODS[k].icon + ' ' + METHODS[k][lang].name + '</span>'; }).join('')
+      + '</div></div>';
+  }
+
+  // Detail cards
+  html += '<div class="methods-detail"><h3>' + (lang==='el'?'Αναλυτικά':'In detail') + '</h3>';
+  primary.forEach(function(k){
+    var m = METHODS[k]; var d = m[lang];
+    var icClass;
+    if(m.intensity==='low') icClass='intensity-low';
+    else if(m.intensity==='medium') icClass='intensity-medium';
+    else if(m.intensity==='medium-high') icClass='intensity-dynamic';
+    else icClass='intensity-high';
+    var cardClass = m.isDynamic ? 'method-detail-card featured' : 'method-detail-card';
+    html += '<div class="'+cardClass+'">'
+      + '<div class="m-icon">' + m.icon + '</div>'
+      + '<div>'
+      + (m.isDynamic ? '<span class="featured-label">' + (lang==='el'?'★ YOUR Pilates Method':'★ YOUR Pilates Method') + '</span>' : '')
+      + '<h4>' + d.name + '</h4>'
+      + '<span class="intensity-badge '+icClass+'">' + (lang==='el'?'Ένταση: ':'Intensity: ') + d.intensity_label + '</span>'
+      + '<ul class="pros-list">' + d.pros.map(function(p){ return '<li>'+p+'</li>'; }).join('') + '</ul>'
+      + '</div></div>';
+  });
+  html += '</div>';
+
+  document.getElementById('results-content').innerHTML = html;
+  showSection('results-section');
+  setLang(lang);
+}
+
+function restartQuiz() {
+  answers = {};
+  currentQ = 1;
+  document.querySelectorAll('.question-block').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('q1').classList.add('active');
+  document.querySelectorAll('.option-btn').forEach(function(b){ b.classList.remove('selected'); });
+  for (var i = 1; i <= totalQ; i++) {
+    var btn = document.getElementById('q'+i+'-next');
+    if (btn) btn.disabled = true;
+  }
+  updateProgress();
+  showSection('hero-section');
+}
+
+// ══════════════════════════════════════════
+// EVENT WIRING
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btn-el').addEventListener('click', function(){ setLang('el'); });
+  document.getElementById('btn-en').addEventListener('click', function(){ setLang('en'); });
+  document.getElementById('start-btn').addEventListener('click', function(){ startQuiz(); });
+  document.getElementById('restart-btn').addEventListener('click', function(){ restartQuiz(); });
+
+  // Option buttons — event delegation
+  document.querySelectorAll('.options-grid').forEach(function(grid){
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('.option-btn');
+      if (!btn) return;
+      var q   = btn.getAttribute('data-q');
+      var val = btn.getAttribute('data-val');
+      if (q && val) selectOption(q, val, btn);
+    });
+  });
+
+  // Nav buttons — delegation from quiz-wrap
+  var qwrap = document.querySelector('.quiz-wrap');
+  if (qwrap) {
+    qwrap.addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if (!btn) return;
+      var action = btn.getAttribute('data-action');
+      var from   = parseInt(btn.getAttribute('data-from') || '0', 10);
+      if (action==='next' && from)    nextQ(from);
+      else if (action==='prev' && from) prevQ(from);
+      else if (action==='results')    showResults();
+    });
+  }
+
+  updateProgress();
+});
+</script>
+</body>
+</html>
